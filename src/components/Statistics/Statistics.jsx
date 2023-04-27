@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Item, List } from './Statistics.styled';
 
 export class Statistics extends Component {
   static propTypes = {
@@ -11,17 +12,24 @@ export class Statistics extends Component {
   render() {
     const { options, total, positivePercentage } = this.props;
     return (
-      <ul>
+      <List>
         {Object.keys(options).map(item => {
           return (
-            <li key={item}>
-              {item}: {options[item]}
-            </li>
+            <Item key={item}>
+              {upperFirstLetter(item)}: {options[item]}
+            </Item>
           );
         })}
-        <li>Total: {total}</li>
-        <li>Positive feedback: {positivePercentage} %</li>
-      </ul>
+        <Item>Total: {total}</Item>
+        <Item>Positive feedback: {positivePercentage} %</Item>
+      </List>
     );
   }
+}
+
+/* Перша літера  заглавна */
+function upperFirstLetter(str) {
+  if (!str) return str;
+
+  return str[0].toUpperCase() + str.slice(1);
 }
